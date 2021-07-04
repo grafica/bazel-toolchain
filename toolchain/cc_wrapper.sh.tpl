@@ -28,6 +28,7 @@
 set -eu
 
 INSTALL_NAME_TOOL="/usr/bin/install_name_tool"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 LIBS=
 LIB_DIRS=
@@ -57,7 +58,7 @@ if [[ "${PATH}:" == *"%{toolchain_path_prefix}bin:"* ]]; then
   # GoCompile sets the PATH to the directory containing the linker, and changes CWD.
   clang "$@"
 else
-  %{toolchain_path_prefix}bin/clang "$@"
+  $SCRIPT_DIR/clang "$@"
 fi
 
 function get_library_path() {
